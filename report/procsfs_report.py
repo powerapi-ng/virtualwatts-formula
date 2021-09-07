@@ -55,7 +55,7 @@ class PROCFSReport(Report):
 
     def __init__(self, timestamp: datetime, sensor: str, target: str, usage: Dict):
         """
-        Initialize an PORCFS report using the given parameters.
+        Initialize an PROCFS report using the given parameters.
         :param datetime timestamp: Timestamp of the report
         :param str sensor: Sensor name
         :param str target: Target name
@@ -138,8 +138,6 @@ class PROCFSReport(Report):
 # REPORT CREATION FUNCTIONS #
 #############################
 
-
-# token modifiy
 
 # def create_core_report(core_id, event_id, event_value, events=None):
 #     id_str = str(core_id)
