@@ -27,8 +27,8 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 from __future__ import annotations
+
 
 from datetime import datetime
 from typing import Dict, List, Tuple
@@ -39,10 +39,10 @@ from powerapi.report.report import Report, BadInputData, CSV_HEADER_COMMON
 CSV_HEADER_PROCFS = CSV_HEADER_COMMON + ['socket', 'cpu']
 
 
-class PROCFSReport(Report):
+class ProcfsReport(Report):
     """
-    PROCFSReport class
-    JSON PROCFS format
+    ProcfsReport class
+    JSON Procfs format
     {
     timestamp: int
     sensor: str,
@@ -55,7 +55,7 @@ class PROCFSReport(Report):
 
     def __init__(self, timestamp: datetime, sensor: str, target: str, usage: Dict):
         """
-        Initialize an PROCFS report using the given parameters.
+        Initialize an Procfs report using the given parameters.
         :param datetime timestamp: Timestamp of the report
         :param str sensor: Sensor name
         :param str target: Target name
@@ -67,37 +67,37 @@ class PROCFSReport(Report):
         self.usage = usage
 
     def __repr__(self) -> str:
-        return 'PROCFSReport(%s, %s, %s, %s)' % (self.timestamp, self.sensor, self.target, sorted(self.usage.keys()))
+        return 'ProcfsReport(%s, %s, %s, %s)' % (self.timestamp, self.sensor, self.target, sorted(self.usage.keys()))
 
 
 
     @staticmethod
-    def from_json(data: Dict) -> PROCFSReport:
+    def from_json(data: Dict) -> ProcfsReport:
         """
         Generate a report using the given data.
         :param data: Dictionary containing the report attributes
-        :return: The PROCFS report initialized with the given data
+        :return: The Procfs report initialized with the given data
         """
         try:
             ts = Report._extract_timestamp(data['timestamp'])
-            return PROCFSReport(ts, data['sensor'], data['target'], data['usage'])
+            return ProcfsReport(ts, data['sensor'], data['target'], data['usage'])
         except KeyError as exn:
             raise BadInputData('no field ' + str(exn.args[0]) + ' in json document')
 
     @staticmethod
-    def to_json(report: PROCFSReport) -> Dict:
+    def to_json(report: ProcfsReport) -> Dict:
         return report.__dict__
 
     @staticmethod
-    def from_mongodb(data: Dict) -> PROCFSReport:
-        return PROCFSReport.from_json(data)
+    def from_mongodb(data: Dict) -> ProcfsReport:
+        return ProcfsReport.from_json(data)
 
     @staticmethod
-    def to_mongodb(report: PROCFSReport) -> Dict:
-        return PROCFSReport.to_json(report)
+    def to_mongodb(report: ProcfsReport) -> Dict:
+        return ProcfsReport.to_json(report)
 
     @staticmethod
-    def from_csv_lines(lines: List[Tuple[str, Dict]]) -> PROCFSReport:
+    def from_csv_lines(lines: List[Tuple[str, Dict]]) -> ProcfsReport:
         sensor_name = None
         target = None
         timestamp = None
@@ -117,9 +117,9 @@ class PROCFSReport(Report):
                     if target != row['target']:
                         raise BadInputData('csv line with different target are mixed into one report')
                 if timestamp is None:
-                    timestamp = PROCFSReport._extract_timestamp(row['timestamp'])
+                    timestamp = ProcfsReport._extract_timestamp(row['timestamp'])
                 else:
-                    if timestamp != PROCFSReport._extract_timestamp(row['timestamp']):
+                    if timestamp != ProcfsReport._extract_timestamp(row['timestamp']):
                         raise BadInputData('csv line with different timestamp are mixed into one report')
 
                 if cgroup_name not in usage:
@@ -132,7 +132,7 @@ class PROCFSReport(Report):
             except KeyError as exn:
                 raise BadInputData('missing field ' + str(exn.args[0]) + ' in csv file ' + file_name)
 
-        return PROCFSReport(timestamp, sensor_name, target, usage)
+        return ProcfsReport(timestamp, sensor_name, target, usage)
 
 #############################
 # REPORT CREATION FUNCTIONS #
@@ -165,7 +165,7 @@ class PROCFSReport(Report):
 
 
 def create_report_root(cgroup_list, timestamp=datetime.fromtimestamp(0), sensor='toto', target='all'):
-    sensor = PROCFSReport(timestamp=timestamp, sensor=sensor, target=target, usage={})
+    sensor = ProcfsReport(timestamp=timestamp, sensor=sensor, target=target, usage={})
     for (cgroup_id, cpu_usage) in cgroup_list:
         sensor.usage[cgroup_id] = cpu_usage
     return sensor
