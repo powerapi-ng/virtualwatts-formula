@@ -53,19 +53,20 @@ class ProcfsReport(Report):
 
     """
 
-    def __init__(self, timestamp: datetime, sensor: str, target: str, usage: Dict):
+    def __init__(self, timestamp: datetime, sensor: str, target: str, usage: Dict, global_cpu_usage : float):
         """
         Initialize an Procfs report using the given parameters.
         :param datetime timestamp: Timestamp of the report
         :param str sensor: Sensor name
         :param str target: Target name
-        :param int usage : CGroup name and cpu_usage
+        :param Dict[str,float] usage : CGroup name and cpu_usage
+        :param float global_cpu_usage : The global CPU usage, with untracked process
         """
         Report.__init__(self, timestamp, sensor, target)
 
         #: (dict): Events groups
         self.usage = usage
-
+        self.global_cpu_sage = global_cpu_usage
     def __repr__(self) -> str:
         return 'ProcfsReport(%s, %s, %s, %s)' % (self.timestamp, self.sensor, self.target, sorted(self.usage.keys()))
 
@@ -122,12 +123,21 @@ class ProcfsReport(Report):
                     if timestamp != ProcfsReport._extract_timestamp(row['timestamp']):
                         raise BadInputData('csv line with different timestamp are mixed into one report')
 
+
+                if global_cpu_usage is None:
+                    global_cpu_usage = row['global_cpu_usage']
+                else:
+                    if global_cpu_usage != row['global_cpu_usage']:
+                        raise BadInputData('Different cpu usage are provided in one report')
+
                 if cgroup_name not in usage:
                     usage[cgroup_name] = {}
 
                 for key, value in row.items():
                     if key not in CSV_HEADER_PROCFS:
                         usage[cgroup_name][key] = int(value)
+
+
 
             except KeyError as exn:
                 raise BadInputData('missing field ' + str(exn.args[0]) + ' in csv file ' + file_name)
