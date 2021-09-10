@@ -66,7 +66,7 @@ class ProcfsReport(Report):
 
         #: (dict): Events groups
         self.usage = usage
-        self.global_cpu_sage = global_cpu_usage
+        self.global_cpu_usage = global_cpu_usage
     def __repr__(self) -> str:
         return 'ProcfsReport(%s, %s, %s, %s)' % (self.timestamp, self.sensor, self.target, sorted(self.usage.keys()))
 

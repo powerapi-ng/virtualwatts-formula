@@ -62,12 +62,11 @@ class VirtualwattsFormulaActor(AbstractCpuDramFormula):
         pw_report = pair[0]
         use_report = pair[1]
 
-        sum_usage = 0
-        for k in use_report.usage.keys() :
-            sum_usage += use_report.usage[k]
+
 
         for k in  use_report.usage.keys() :
-            report = PowerReport(pw_report.timestamp, "virtualwatts", use_report.target,pw_report.power* use_report.usage[k] / sum_usage , {})
+            used_power = pw_report.power* use_report.usage[k] / use_report.global_cpu_usage
+            report = PowerReport(pw_report.timestamp, "virtualwatts", use_report.target, used_power  , {})
             for name , pusher in self.pushers.items():
                 self.log_debug('send ' + str(report) + ' to ' + name)
                 self.send(pusher, report)

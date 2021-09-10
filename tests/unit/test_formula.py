@@ -67,7 +67,7 @@ class TestVirtualwattsFormula(AbstractTestActor):
     def test_send_power_report_virtualwatts_report_to_virtualwatts_formula_return_correct_result(self, system,started_actor, dummy_pipe_out):
         report1 = PowerReport(datetime.datetime(1970,1,1), "toto","t1",42,{})
         usage_dic = {"t1":0.5}
-        report2 = ProcfsReport(datetime.datetime(1970,1,1), "totoproc", "t1",usage_dic)
+        report2 = ProcfsReport(datetime.datetime(1970,1,1), "totoproc", "t1",usage_dic,0.5)
 
         system.tell(started_actor,report2)
         system.tell(started_actor,report1)
@@ -83,7 +83,7 @@ class TestVirtualwattsFormula(AbstractTestActor):
     def test_send_track_two_process_with_virtualwatts_formula_return_correct_result(self, system,started_actor, dummy_pipe_out):
         report1 = PowerReport(datetime.datetime(1970,1,1), "toto","t1",100,{})
         usage_dic = {"t1":0.7, "t2":0.3}
-        report2 = ProcfsReport(datetime.datetime(1970,1,1), "totoproc", "t1",usage_dic)
+        report2 = ProcfsReport(datetime.datetime(1970,1,1), "totoproc", "t1",usage_dic,1)
 
 
         system.tell(started_actor,report2)
@@ -95,4 +95,23 @@ class TestVirtualwattsFormula(AbstractTestActor):
         if msg.target == "t1":
             assert msg.power == 70
         if msg.target == "t2":
-            assert msg.power == 70
+            assert msg.power == 30
+
+
+
+    def test_send_track_two_process_with_virtualwatts_formula_return_correct_result(self, system,started_actor, dummy_pipe_out):
+        report1 = PowerReport(datetime.datetime(1970,1,1), "toto","t1",100,{})
+        usage_dic = {"t1":0.7, "t2":0.3}
+        report2 = ProcfsReport(datetime.datetime(1970,1,1), "totoproc", "t1",usage_dic,2)
+
+
+        system.tell(started_actor,report2)
+        system.tell(started_actor,report1)
+
+
+        _,msg = recv_from_pipe(dummy_pipe_out,1)
+        assert isinstance(msg,PowerReport)
+        if msg.target == "t1":
+            assert msg.power == 35
+        if msg.target == "t2":
+            assert msg.power == 15
