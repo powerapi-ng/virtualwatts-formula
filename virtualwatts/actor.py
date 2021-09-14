@@ -25,21 +25,21 @@ from powerapi.message import FormulaStartMessage
 from powerapi.report import PowerReport
 from powerapi.utils.sync import Sync
 
-from .report import ProcfsReport
-from .context import VirtualwattsFormulaConfig
+from powerapi.report import ProcfsReport
+from .context import VirtualWattsFormulaConfig
 
 
 
 
-class VirtualwattsFormulaValues(FormulaValues):
-    def __init__(self, power_pushers: Dict[str, ActorAddress],config : VirtualwattsFormulaConfig):
+class VirtualWattsFormulaValues(FormulaValues):
+    def __init__(self, power_pushers: Dict[str, ActorAddress],config : VirtualWattsFormulaConfig):
         """
         :param config: Configuration of the formula
         """
         FormulaValues.__init__(self, power_pushers)
         self.config = config
 
-class VirtualwattsFormulaActor(AbstractCpuDramFormula):
+class VirtualWattsFormulaActor(AbstractCpuDramFormula):
     """
     This actor handle the reports for the VirutalWatts formula.
     """

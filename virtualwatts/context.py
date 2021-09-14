@@ -18,7 +18,7 @@ import re
 from enum import Enum
 
 
-class VirtualwattsFormulaScope(Enum):
+class VirtualWattsFormulaScope(Enum):
     """
     Enum used to set the scope of the SmartWatts formula.
     """
@@ -26,7 +26,7 @@ class VirtualwattsFormulaScope(Enum):
     DRAM = "dram"
 
 
-class VirtualwattsFormulaConfig:
+class VirtualWattsFormulaConfig:
     """
     Global config of the Procfs formula.
     """
