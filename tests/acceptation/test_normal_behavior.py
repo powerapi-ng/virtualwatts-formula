@@ -55,14 +55,15 @@ class TCPThread(Thread):
         Thread.__init__(self)
 
         self.msg_list = msg_list
-        self.sock = socket.socket()
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.port = port
 
     def run(self):
-
-        self.sock.connect(('localhost', self.port))
+        time.sleep(1)
+        # Sleep to let the time to the puller to start the server
+        self.sock.connect(('127.0.0.1', self.port))
         for msg in self.msg_list:
-            self.sock.send(bytes(json.dumps(msg), 'utf-8'))
+            self.sock.sendall(bytes(json.dumps(msg), 'utf-8'))
             time.sleep(0.5)
         self.sock.close()
 
@@ -153,8 +154,9 @@ def test_normal_behaviour(mongo_database, unused_tcp_port, shutdown_system, virt
     vw_pro = MainProcess(unused_tcp_port)
     vw_pro.start()
 
-    file_sensor.start()
     tcp_sensor.start()
+    file_sensor.start()
+
 
     file_sensor.join()
     tcp_sensor.join()
