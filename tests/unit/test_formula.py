@@ -32,33 +32,32 @@ import pytest
 
 from thespian.actors import ActorExitRequest
 
-from virtualwatts.actor import VirtualwattsFormulaActor, VirtualwattsFormulaValues
+from virtualwatts.actor import VirtualWattsFormulaActor
 from powerapi.formula import CpuDramDomainValues
 from powerapi.message import StartMessage, FormulaStartMessage, ErrorMessage, EndMessage, OKMessage
-from powerapi.report import Report, PowerReport
-from virtualwatts.report import ProcfsReport
+from powerapi.report import Report, PowerReport, ProcfsReport
 from powerapi.test_utils.abstract_test import AbstractTestActor, recv_from_pipe
 from powerapi.test_utils.actor import system
 from powerapi.test_utils.dummy_actor import logger
 import datetime
-from virtualwatts.actor import VirtualwattsFormulaValues
-from virtualwatts.context import VirtualwattsFormulaConfig
+from virtualwatts.actor import VirtualWattsFormulaValues
+from virtualwatts.context import VirtualWattsFormulaConfig
 
 
-class TestVirtualwattsFormula(AbstractTestActor):
+class TestVirtualWattsFormula(AbstractTestActor):
     @pytest.fixture
     def actor(self, system):
-        actor = system.createActor(VirtualwattsFormulaActor)
+        actor = system.createActor(VirtualWattsFormulaActor)
         yield actor
         system.tell(actor, ActorExitRequest())
 
     @pytest.fixture
     def actor_start_message(self, logger):
-        config = VirtualwattsFormulaConfig(1000, datetime.timedelta(500))
-        values = VirtualwattsFormulaValues({'logger': logger},config)
+        config = VirtualWattsFormulaConfig(1000, datetime.timedelta(500))
+        values = VirtualWattsFormulaValues({'logger': logger},config)
         return FormulaStartMessage('system', 'test_virtualwatts_formula', values, CpuDramDomainValues('test_device', ('test_sensor', 0, 0)))
 
-    def test_starting_virtualwatts_formula_without_VirtualwattsFormulaStartMessage_answer_ErrorMessage(self, system, actor):
+    def test_starting_virtualwatts_formula_without_VirtualWattsFormulaStartMessage_answer_ErrorMessage(self, system, actor):
         answer = system.ask(actor, StartMessage('system', 'test'))
         assert isinstance(answer, ErrorMessage)
         assert answer.error_message == 'use FormulaStartMessage instead of StartMessage'

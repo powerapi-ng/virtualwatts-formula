@@ -13,12 +13,14 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+"""
+Module that define the virtuallWatts actor
+"""
+
 from typing import Dict
-from collections import OrderedDict, defaultdict
-from math import ldexp, fabs
 
 from thespian.actors import ActorAddress
-from sklearn.exceptions import NotFittedError
 
 from powerapi.formula import AbstractCpuDramFormula, FormulaValues
 from powerapi.message import FormulaStartMessage
@@ -29,15 +31,18 @@ from powerapi.report import ProcfsReport
 from .context import VirtualWattsFormulaConfig
 
 
-
-
 class VirtualWattsFormulaValues(FormulaValues):
-    def __init__(self, power_pushers: Dict[str, ActorAddress],config : VirtualWattsFormulaConfig):
+    """
+    Special parameters needed for the formula
+    """
+    def __init__(self, power_pushers: Dict[str, ActorAddress],
+                 config: VirtualWattsFormulaConfig):
         """
         :param config: Configuration of the formula
         """
         FormulaValues.__init__(self, power_pushers)
         self.config = config
+
 
 class VirtualWattsFormulaActor(AbstractCpuDramFormula):
     """
@@ -50,43 +55,55 @@ class VirtualWattsFormulaActor(AbstractCpuDramFormula):
         self.config = None
         self.sync = None
 
+    def _initialization(self, start_message: FormulaStartMessage):
+        AbstractCpuDramFormula._initialization(self, start_message)
+        self.config = start_message.values.config
 
-    def _initialization(self, message: FormulaStartMessage):
-        AbstractCpuDramFormula._initialization(self, message)
-        self.config = message.values.config
+        self.sync = Sync(lambda x: isinstance(x, PowerReport),
+                         lambda x: isinstance(x, ProcfsReport),
+                         self.config.delay_threshold)
 
-        self.sync = Sync(lambda x : isinstance(x,PowerReport),lambda x : isinstance(x,ProcfsReport),self.config.delay_threshold)
+    def process_synced_pair(self, pair):
+        """
+        :param pair: A power report and a procfs report sync in time
 
-
-    def process_synced_pair(self,pair):
+        :return the power consumption of each process
+        """
         pw_report = pair[0]
         use_report = pair[1]
 
+        for k in use_report.usage.keys():
+            used_power = pw_report.power * use_report.usage[k]
+            used_power = used_power / use_report.global_cpu_usage
 
-
-        for k in  use_report.usage.keys() :
-            used_power = pw_report.power* use_report.usage[k] / use_report.global_cpu_usage
-            report = PowerReport(pw_report.timestamp, "virtualwatts", use_report.target, used_power  , {})
-            for name , pusher in self.pushers.items():
+            report = PowerReport(pw_report.timestamp, "virtualwatts",
+                                 use_report.target, used_power, {})
+            for name, pusher in self.pushers.items():
                 self.log_debug('send ' + str(report) + ' to ' + name)
                 self.send(pusher, report)
 
+    def receiveMsg_ProcfsReport(self, message: ProcfsReport, _):
+        """
+        :param message: A procfs Report received from sender
 
-
-
-    def receiveMsg_ProcfsReport(self,message:ProcfsReport, sender: ActorAddress):
+        Provide the report to the sync and call the compute if a pair is formed
+        """
         self.log_debug('receive Procfs Report :' + str(message))
         self.sync.add_report(message)
         pair = self.sync.request()
 
-        if pair is not None :
+        if pair is not None:
             self.process_synced_pair(pair)
 
+    def receiveMsg_PowerReport(self, message: PowerReport, _):
+        """
+        :param message: A procfs Report received from sender
 
-    def receiveMsg_PowerReport(self,message:PowerReport, sender: ActorAddress):
+        Provide the report to the sync and call the compute if a pair is formed
+        """
         self.log_debug('receive Power Report :' + str(message))
         self.sync.add_report(message)
         pair = self.sync.request()
 
-        if pair is not None :
+        if pair is not None:
             self.process_synced_pair(pair)

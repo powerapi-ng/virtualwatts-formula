@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import re
+
 from enum import Enum
 
 
@@ -22,6 +22,7 @@ class VirtualWattsFormulaScope(Enum):
     """
     Enum used to set the scope of the SmartWatts formula.
     """
+
     CPU = "cpu"
     DRAM = "dram"
 
@@ -34,8 +35,10 @@ class VirtualWattsFormulaConfig:
     def __init__(self, reports_frequency, delay_threshold):
         """
         Initialize a new formula config object.
-        :param reports_frequency: Frequency at which the reports (in milliseconds)
-        :param delay_threshold: Delay threshold to pair two report (in milliseconds)
+        :param reports_frequency: Frequency at which
+                                  the reports is provided (in milliseconds)
+        :param delay_threshold: Delay threshold to pair
+                                two report (in milliseconds)
         """
         self.reports_frequency = reports_frequency
         self.delay_threshold = delay_threshold
