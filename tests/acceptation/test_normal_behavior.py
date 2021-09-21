@@ -45,15 +45,14 @@ def mongodb_content():
     return []
 
 
-
 class TCPThread(Thread):
     """
     Thread that open a connection to a socket and send it a list of reports
     """
 
     def __init__(self, msg_list, port):
-        Thread.__init__(self)
 
+        Thread.__init__(self)
         self.msg_list = msg_list
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.port = port
@@ -62,11 +61,11 @@ class TCPThread(Thread):
         time.sleep(1)
         # Sleep to let the time to the puller to start the server
         self.sock.connect(('127.0.0.1', self.port))
+
         for msg in self.msg_list:
             self.sock.sendall(bytes(json.dumps(msg), 'utf-8'))
             time.sleep(0.5)
         self.sock.close()
-
 
 
 class FileThread(Thread):
@@ -81,15 +80,12 @@ class FileThread(Thread):
         self.filename = filename
 
     def run(self):
-
-
+        time.sleep(0.5)
         for msg in self.msg_list:
             file_obj = open(self.filename, 'w')
             file_obj.write(json.dumps(msg))
             file_obj.close()
             time.sleep(0.5)
-
-
 
 
 class MainProcess(Process):
@@ -116,12 +112,10 @@ class MainProcess(Process):
                                               'uri': MONGO_URI,
                                               'db': MONGO_DATABASE_NAME,
                                               'collection': MONGO_OUTPUT_COLLECTION_NAME}},
-                  'formula': { 'delay-threshold': 250,
+                  'formula': { 'delay-threshold': 500,
                                'sensor-reports-frequency': 500}}
         # Next command is reached
         run_virtualwatts(config)
-
-
 
 def check_db(virtualwatts_procfs_timeline,virtualwatts_power_timeline):   # TODO
     procfs_report =  virtualwatts_procfs_timeline
@@ -130,38 +124,33 @@ def check_db(virtualwatts_procfs_timeline,virtualwatts_power_timeline):   # TODO
     c_output = mongo[MONGO_DATABASE_NAME][MONGO_OUTPUT_COLLECTION_NAME]
 
     amount = 0
-    for r in procfs_report :
-        amount += len(r['usage'])
-    amount *=  len(power_report)
+    r = procfs_report[0]
+    amount = len(r['usage']) * len(power_report)
 
     assert c_output.count_documents({}) == amount
 
-    # for report in json_reports:
-
-    #     ts = datetime.strptime(report['timestamp'], "%Y-%m-%dT%H:%M:%S.%f")
-    #     assert c_output.count_documents(
-    #         {'timestamp': ts, 'sensor': report['sensor'],
-    #          'target': report['target']}) == 2
-
-
+    for report in c_output.find({'target': 'all'}):
+        ts = report['timestamp']
+        sum = 0
+        for r in c_output.find({'timestamp': ts}):
+            sum += int(r['power'])
+            assert sum == 42
 
 
 def test_normal_behaviour(mongo_database, unused_tcp_port, shutdown_system, virtualwatts_procfs_timeline, virtualwatts_power_timeline ):
-    tcp_sensor = TCPThread(virtualwatts_procfs_timeline,unused_tcp_port)
+    tcp_sensor = TCPThread(virtualwatts_procfs_timeline, unused_tcp_port)
     file_sensor = FileThread(virtualwatts_power_timeline, '/tmp/SW_output')
-
 
     vw_pro = MainProcess(unused_tcp_port)
     vw_pro.start()
 
-    tcp_sensor.start()
     file_sensor.start()
+    tcp_sensor.start()
 
-
-    file_sensor.join()
     tcp_sensor.join()
+    file_sensor.join()
 
-    time.sleep(3)
+    time.sleep(5)
 
     os.system('kill ' + str(vw_pro.pid))
 

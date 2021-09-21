@@ -19,7 +19,7 @@ Module that define the virtuallWatts actor
 """
 
 from typing import Dict
-
+import datetime
 from thespian.actors import ActorAddress
 
 from powerapi.formula import AbstractCpuDramFormula, FormulaValues
@@ -61,26 +61,32 @@ class VirtualWattsFormulaActor(AbstractCpuDramFormula):
 
         self.sync = Sync(lambda x: isinstance(x, PowerReport),
                          lambda x: isinstance(x, ProcfsReport),
-                         self.config.delay_threshold)
+                         datetime.timedelta(milliseconds=self.config.delay_threshold))
 
-    def process_synced_pair(self, pair):
+    def process_synced_pair(self):
         """
         :param pair: A power report and a procfs report sync in time
 
         :return the power consumption of each process
         """
-        pw_report = pair[0]
-        use_report = pair[1]
 
-        for k in use_report.usage.keys():
-            used_power = pw_report.power * use_report.usage[k]
-            used_power = used_power / use_report.global_cpu_usage
+        pair = self.sync.request()
+        if pair is not None:
+            self.log_debug('Have synced pair :' + str(pair))
+            pw_report = pair[0]
+            use_report = pair[1]
 
-            report = PowerReport(pw_report.timestamp, "virtualwatts",
-                                 use_report.target, used_power, {})
-            for name, pusher in self.pushers.items():
-                self.log_debug('send ' + str(report) + ' to ' + name)
-                self.send(pusher, report)
+            for k in use_report.usage.keys():
+                used_power = pw_report.power * use_report.usage[k]
+                used_power = used_power / use_report.global_cpu_usage
+
+                report = PowerReport(pw_report.timestamp, "virtualwatts",
+                                     k, used_power, {})
+                for name, pusher in self.pushers.items():
+                    self.log_debug('send ' + str(report) + ' to ' + name)
+                    self.send(pusher, report)
+
+        self.log_debug('No synced pair yet')
 
     def receiveMsg_ProcfsReport(self, message: ProcfsReport, _):
         """
@@ -90,10 +96,7 @@ class VirtualWattsFormulaActor(AbstractCpuDramFormula):
         """
         self.log_debug('receive Procfs Report :' + str(message))
         self.sync.add_report(message)
-        pair = self.sync.request()
-
-        if pair is not None:
-            self.process_synced_pair(pair)
+        self.process_synced_pair()
 
     def receiveMsg_PowerReport(self, message: PowerReport, _):
         """
@@ -103,7 +106,4 @@ class VirtualWattsFormulaActor(AbstractCpuDramFormula):
         """
         self.log_debug('receive Power Report :' + str(message))
         self.sync.add_report(message)
-        pair = self.sync.request()
-
-        if pair is not None:
-            self.process_synced_pair(pair)
+        self.process_synced_pair()

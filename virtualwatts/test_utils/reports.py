@@ -10,7 +10,7 @@ def virtualwatts_procfs_timeline():
     return [
         {
             "timestamp": "2021-09-14T12:37:37.168817",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -23,7 +23,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:37.669237",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -36,7 +36,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:38.170142",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -49,7 +49,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:38.670338",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -62,7 +62,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:39.171321",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -75,7 +75,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:39.671572",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -88,7 +88,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:40.172503",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -101,7 +101,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:40.672693",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -114,7 +114,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:41.173552",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -127,7 +127,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:41.673815",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -140,7 +140,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:42.174560",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -153,7 +153,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:42.674690",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -166,7 +166,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:43.175441",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -179,7 +179,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:43.675743",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -192,7 +192,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:44.176551",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -205,7 +205,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:44.677307",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -218,7 +218,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:45.178049",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -231,7 +231,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:45.678310",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -244,7 +244,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:46.179120",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -257,7 +257,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:46.679308",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -270,7 +270,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:47.180223",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -283,7 +283,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:47.680468",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -296,7 +296,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:48.181316",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -309,7 +309,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:48.681683",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -322,7 +322,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:49.182522",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -335,7 +335,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:49.682731",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -348,7 +348,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:50.183680",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -361,7 +361,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:50.683812",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -374,7 +374,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:51.184792",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -387,7 +387,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:51.685027",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -400,7 +400,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:52.185709",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -413,7 +413,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:52.686065",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -426,7 +426,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:53.186929",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -439,7 +439,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:53.687190",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -452,7 +452,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:54.188031",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -465,7 +465,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:54.688674",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -478,7 +478,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:55.189489",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -491,7 +491,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:55.690299",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -504,7 +504,7 @@ def virtualwatts_procfs_timeline():
         },
         {
             "timestamp": "2021-09-14T12:37:56.191124",
-            "sensor": "procfs_sensor",
+            "sensor": "formula_group",
             "target": ["firefox_cgroup", "emacs_cgroup",
                        "zsh_cgroup", "mongo_cgroup"],
             "usage": {
@@ -527,235 +527,235 @@ def virtualwatts_power_timeline():
     return [
         {
             "timestamp": "2021-09-14T12:37:37.168817",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:37.669237",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:38.170142",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:38.670338",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:39.171321",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:39.671572",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:40.172503",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:40.672693",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:41.173552",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:41.673815",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:42.174560",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:42.674690",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:43.175441",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:43.675743",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:44.176551",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:44.677307",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:45.178049",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:45.678310",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:46.179120",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:46.679308",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:47.180223",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:47.680468",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:48.181316",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:48.681683",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:49.182522",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:49.682731",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:50.183680",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:50.683812",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:51.184792",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:51.685027",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:52.185709",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:52.686065",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:53.186929",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:53.687190",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:54.188031",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:54.688674",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:55.189489",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:55.690299",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
         {
             "timestamp": "2021-09-14T12:37:56.191124",
-            "sensor": "power_sensor",
+            "sensor": "formula_group",
             "target": "all",
             "power": 42,
         },
