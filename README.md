@@ -19,7 +19,7 @@ The documentation is not available yet.
 
 If you would like to contribute code you can do so through GitHub by forking the
 repository and sending a pull request.
-You should start by reading the [contribution guide](https://github.com/powerapi-ng/virtualwatts-formula/blob/master/contributing.md)
+You should start by reading the [contribution guide](https://github.com/powerapi-ng/virtualwatts-formula/blob/main/contributing.md)
 
 When submitting code, please check that it is conform by using `pylint` and
 `flake8` with the configurations files at the root of the project.
