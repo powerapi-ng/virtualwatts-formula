@@ -29,12 +29,10 @@ from multiprocessing import Process
 import os
 import json
 import socket
-
-
-
-from virtualwatts.__main__ import run_virtualwatts
+import datetime
+import sys
+from virtualwatts.__main__ import run_virtualwatts, VirtualWattsConfigValidator
 from virtualwatts.test_utils.reports import virtualwatts_procfs_timeline, virtualwatts_power_timeline
-
 from powerapi.test_utils.actor import shutdown_system
 from powerapi.test_utils.db.mongo import mongo_database
 from powerapi.test_utils.db.mongo import MONGO_URI, MONGO_INPUT_COLLECTION_NAME, MONGO_OUTPUT_COLLECTION_NAME, MONGO_DATABASE_NAME
@@ -112,9 +110,11 @@ class MainProcess(Process):
                                               'uri': MONGO_URI,
                                               'db': MONGO_DATABASE_NAME,
                                               'collection': MONGO_OUTPUT_COLLECTION_NAME}},
-                  'formula': { 'delay-threshold': 500,
-                               'sensor-reports-frequency': 500}}
+                  'delay-threshold': 500,
+                  'sensor-reports-sampling-interval': datetime.timedelta(500)}
         # Next command is reached
+        if not VirtualWattsConfigValidator.validate(config):
+            sys.exit(-1)
         run_virtualwatts(config)
 
 def check_db(virtualwatts_procfs_timeline,virtualwatts_power_timeline):   # TODO

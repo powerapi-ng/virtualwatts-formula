@@ -19,7 +19,6 @@ Module that define the virtuallWatts actor
 """
 
 from typing import Dict
-import datetime
 from thespian.actors import ActorAddress
 
 from powerapi.formula import AbstractCpuDramFormula, FormulaValues
@@ -56,12 +55,13 @@ class VirtualWattsFormulaActor(AbstractCpuDramFormula):
         self.sync = None
 
     def _initialization(self, start_message: FormulaStartMessage):
+
         AbstractCpuDramFormula._initialization(self, start_message)
         self.config = start_message.values.config
 
         self.sync = Sync(lambda x: isinstance(x, PowerReport),
                          lambda x: isinstance(x, ProcfsReport),
-                         datetime.timedelta(milliseconds=self.config.delay_threshold))
+                         self.config.delay_threshold)
 
     def process_synced_pair(self):
         """

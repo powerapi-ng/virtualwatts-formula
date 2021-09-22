@@ -57,10 +57,10 @@ class TestVirtualWattsFormula(AbstractTestActor):
         values = VirtualWattsFormulaValues({'logger': logger},config)
         return FormulaStartMessage('system', 'test_virtualwatts_formula', values, CpuDramDomainValues('test_device', ('test_sensor', 0, 0)))
 
-    def test_starting_virtualwatts_formula_without_VirtualWattsFormulaStartMessage_answer_ErrorMessage(self, system, actor):
-        answer = system.ask(actor, StartMessage('system', 'test'))
-        assert isinstance(answer, ErrorMessage)
-        assert answer.error_message == 'use FormulaStartMessage instead of StartMessage'
+    # def test_starting_virtualwatts_formula_without_VirtualWattsFormulaStartMessage_answer_ErrorMessage(self, system, actor):
+    #     answer = system.ask(actor, StartMessage('system', 'test'))
+    #     assert isinstance(answer, ErrorMessage)
+    #     assert answer.error_message == 'use FormulaStartMessage instead of StartMessage'
 
 
     def test_send_power_report_virtualwatts_report_to_virtualwatts_formula_return_correct_result(self, system,started_actor, dummy_pipe_out):

@@ -25,7 +25,7 @@ import signal
 import sys
 import json
 from typing import Dict
-
+import datetime
 
 from powerapi import __version__ as powerapi_version
 from powerapi.dispatcher import DispatcherActor, RouteTable
@@ -73,8 +73,8 @@ def generate_virtualwatts_parser() -> ComponentSubParser:
 
     # Sensor information
     parser.add_argument(
-        "sensor-reports-frequency",
-        help="The frequency with which measurements \
+        "sensor-reports-sampling-interval",
+        help="The time interval between two measurements \
         are made (in milliseconds)",
         type=int,
         default=1000,
@@ -96,7 +96,7 @@ def run_virtualwatts(args) -> None:
     :param args: CLI arguments namespace
     :param logger: Logger to use for the actors
     """
-    fconf = args["formula"]
+    fconf = args
 
     logging.info(
         "VirtualWatts version %s using PowerAPI version %s",
@@ -137,7 +137,7 @@ def run_virtualwatts(args) -> None:
             )
 
         formula_config = VirtualWattsFormulaConfig(
-            fconf["sensor-reports-frequency"], fconf["delay-threshold"]
+            fconf["sensor-reports-sampling-interval"], fconf["delay-threshold"]
         )
         dispatcher_start_message = DispatcherStartMessage(
             "system",
@@ -195,15 +195,14 @@ class VirtualWattsConfigValidator(ConfigValidator):
     def validate(conf: Dict):
         if not ConfigValidator.validate(conf):
             return False
-        if "formula" not in conf:
-            logging.error("No configuration found for virtualwatts formula")
-            return False
 
-        if "sensor-reports-frequency" not in conf["formula"]:
-            conf["formula"]["sensor-reports-frequency"] = 500
-        if "delay-threshold" not in conf["formula"]:
-            conf["formula"]["delay-threshold"] = 250
+        if "sensor-reports-sampling-interval" not in conf:
+            conf["sensor-reports-sampling-interval"] = 500
+        if "delay-threshold" not in conf:
+            conf["delay-threshold"] = 250.0
 
+        conf["delay-threshold"] = datetime.timedelta(
+            milliseconds=conf["delay-threshold"])
         return True
 
 
@@ -224,6 +223,7 @@ if __name__ == "__main__":
         if config_file_path is not None
         else get_config_from_cli()
     )
+    logging.debug("Validate config")
     if not VirtualWattsConfigValidator.validate(config):
         sys.exit(-1)
     logging.basicConfig(level=logging.WARNING

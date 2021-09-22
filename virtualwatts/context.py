@@ -32,13 +32,13 @@ class VirtualWattsFormulaConfig:
     Global config of the Procfs formula.
     """
 
-    def __init__(self, reports_frequency, delay_threshold):
+    def __init__(self, reports_sampling_interval, delay_threshold):
         """
         Initialize a new formula config object.
-        :param reports_frequency: Frequency at which
-                                  the reports is provided (in milliseconds)
+        :param reports_sampling_interval: The time interval
+        between two reports (in milliseconds)
         :param delay_threshold: Delay threshold to pair
                                 two report (in milliseconds)
         """
-        self.reports_frequency = reports_frequency
+        self.reports_sampling_interval = reports_sampling_interval
         self.delay_threshold = delay_threshold
