@@ -39,8 +39,9 @@ jobs:
           python3 -m venv venv
           . venv/bin/activate
           python -m pip install --upgrade pip
-          pip install flake8 pylint powerapi
+          pip install flake8 pylint
           pip install -e ".[mongodb, influxdb, prometheus, libvirt]"
+          pip install .
       - name: Test with pytest
         run: |
           . venv/bin/activate
