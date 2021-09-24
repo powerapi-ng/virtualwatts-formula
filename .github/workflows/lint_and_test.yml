@@ -16,8 +16,6 @@ jobs:
         image: mongo:latest
         ports:
           - 27017:27017
-      powerapi:
-        image: powerapi:latest
     steps:
       - name: Install tools
         run: |
@@ -41,7 +39,7 @@ jobs:
           python3 -m venv venv
           . venv/bin/activate
           python -m pip install --upgrade pip
-          pip install flake8 pylint
+          pip install flake8 pylint powerapi
           pip install -e ".[mongodb, influxdb, prometheus, libvirt]"
       - name: Test with pytest
         run: |
