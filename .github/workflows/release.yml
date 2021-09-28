@@ -38,7 +38,7 @@ jobs:
         if: ${{ matrix.python-version == 3.6 }}
         run: | 
           wget https://github.com/powerapi-ng/powerapi-ci-env/blob/main/to_36.sh
-          ./to_36.sh
+          sh to_36.sh
       - name: Cache pip
         uses: actions/cache@v2
         with:
@@ -165,7 +165,7 @@ jobs:
       - name: Convert to python3.6 code
         run: | 
           wget https://github.com/powerapi-ng/powerapi-ci-env/blob/main/to_36.sh
-          ./to_36.sh
+          sh to_36.sh
       - name: Create source package
         run: |
           apt install -y python3-setuptools python3-stdeb python3-numpy
