@@ -56,7 +56,7 @@ class TCPThread(Thread):
         self.port = port
 
     def run(self):
-        time.sleep(1)
+        time.sleep(3)
         # Sleep to let the time to the puller to start the server
         self.sock.connect(('127.0.0.1', self.port))
 
