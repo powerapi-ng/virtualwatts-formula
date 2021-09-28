@@ -37,7 +37,7 @@ jobs:
       - name: Convert to python3.6 code
         if: ${{ matrix.python-version == 3.6 }}
         run: | 
-          wget https://github.com/powerapi-ng/powerapi-ci-env/blob/main/to_36.sh
+          wget https://raw.githubusercontent.com/powerapi-ng/powerapi-ci-env/main/to_36.sh
           /bin/bash to_36.sh virtualwatts
       - name: Cache pip
         uses: actions/cache@v2
@@ -164,7 +164,7 @@ jobs:
           sed -i 's/requests >=2.0//g' setup.cfg
       - name: Convert to python3.6 code
         run: | 
-          wget https://github.com/powerapi-ng/powerapi-ci-env/blob/main/to_36.sh
+          wget https://raw.githubusercontent.com/powerapi-ng/powerapi-ci-env/main/to_36.sh
           /bin/bash to_36.sh virtualwatts
       - name: Create source package
         run: |
