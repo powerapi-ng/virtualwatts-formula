@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    branches:
+      - ci-migration
 env:
   repository: https://github.com/powerapi-ng/virtualwatts
 jobs:
@@ -12,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7,3.8,3.9]
+        python-version: [3.6, 3.7, 3.8, 3.9]
     services:
       mongo:
         image: mongo:latest
@@ -32,6 +34,9 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Convert to python3.6 code
+        if: ${{ matrix.python-version == 3.6 }}
+        run: ./to_36.sh
       - name: Cache pip
         uses: actions/cache@v2
         with:
@@ -94,6 +99,7 @@ jobs:
         run: |
           python3 -m venv venv
           . venv/bin/activate
+          python3 -m pip install wheel
           python3 setup.py sdist bdist_wheel
       - name: Upload to pypi
         run: twine upload dist/*
@@ -130,6 +136,10 @@ jobs:
       image: powerapi/powerapi-build-deb
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.6
       - name: Cache pip
         uses: actions/cache@v2
         with:
