@@ -36,7 +36,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Convert to python3.6 code
         if: ${{ matrix.python-version == 3.6 }}
-        run: ./to_36.sh
+        run: | 
+          wget https://github.com/powerapi-ng/powerapi-ci-env/blob/main/to_36.sh
+          ./to_36.sh
       - name: Cache pip
         uses: actions/cache@v2
         with:
@@ -159,10 +161,11 @@ jobs:
           sed -i 's/tests_require =//g' setup.cfg
           sed -i 's/pytest >=3.9.2//g' setup.cfg
           sed -i 's/pytest-asyncio >=0.14.0//g' setup.cfg
-          sed -i 's/mock >=2.0//g' setup.cfg
           sed -i 's/requests >=2.0//g' setup.cfg
       - name: Convert to python3.6 code
-        run: ./to_36.sh
+        run: | 
+          wget https://github.com/powerapi-ng/powerapi-ci-env/blob/main/to_36.sh
+          ./to_36.sh
       - name: Create source package
         run: |
           apt install -y python3-setuptools python3-stdeb python3-numpy
