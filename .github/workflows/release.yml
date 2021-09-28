@@ -53,7 +53,7 @@ jobs:
           . venv/bin/activate
           python -m pip install --upgrade pip
           pip install flake8 pylint
-          pip install -e ".[mongodb, influxdb, prometheus, libvirt]"
+          pip install .
       - name: Test with pytest
         run: |
           . venv/bin/activate
