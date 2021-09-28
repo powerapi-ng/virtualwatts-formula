@@ -13,15 +13,15 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7,3.8,3.9]
-    # services:
-    #   mongo:
-    #     image: mongo:latest
-    #     ports:
-    #       - 27017:27017
-    #   influx:
-    #     image: influxdb:1.8
-    #     ports:
-    #       - 8086:8086
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+      influx:
+        image: influxdb:1.8
+        ports:
+          - 8086:8086
     steps:
       - name: Install tools
         run: |
