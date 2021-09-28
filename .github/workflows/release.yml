@@ -54,7 +54,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pylint
       - name: install powerapi
-        if: ${{ matrix.python-version != 3.6 }}
+        if: ${{ matrix.python-version == 3.6 }}
         run: |
            VERSION=$(grep "powerapi " setup.cfg | cut -d = -f 2) 
            pip install thespian 
