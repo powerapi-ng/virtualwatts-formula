@@ -69,7 +69,7 @@ jobs:
       - name: Test with pytest
         run: |
           . venv/bin/activate
-          python setup.py test
+          python setup.py pytest
       - name: Lint with flake8
         if: ${{ matrix.python-version != 3.6 }}
         run: |
