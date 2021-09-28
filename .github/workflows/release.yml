@@ -56,13 +56,16 @@ jobs:
       - name: install powerapi
         if: ${{ matrix.python-version == 3.6 }}
         run: |
+           . venv/bin/activate
            VERSION=$(grep "powerapi " setup.cfg | cut -d = -f 2) 
            pip install thespian 
            wget https://github.com/powerapi-ng/powerapi/releases/tag/$VERSION/python3-powerapi_1.0.0-1_all.deb
            dpkg -i python3-powerapi_1.0.0-1_all.deb
            apt install -f y 
       - name: install virtuallwatts
-        run: pip install .
+        run: | 
+            . venv/bin/activate
+            pip install .
       - name: Test with pytest
         run: |
           . venv/bin/activate
