@@ -56,7 +56,7 @@ class TCPThread(Thread):
         self.port = port
 
     def run(self):
-        time.sleep(13)
+        time.sleep(1)
         # Sleep to let the time to the puller to start the server
         self.sock.connect(('127.0.0.1', self.port))
 
@@ -99,7 +99,7 @@ class MainProcess(Process):
                   "stream":True,
                   'input': {'puller_filedb': {'type': 'filedb',
                                               'model': 'PowerReport',
-                                              'filename': '/tmp/SW_output'},
+                                              'filename': 'SW_output'},
                             'puller_tcpdb': {'type' : 'socket',
                                              'model': 'ProcfsReport',
                                              'uri': '127.0.0.1',
@@ -139,7 +139,7 @@ def check_db(virtualwatts_procfs_timeline,virtualwatts_power_timeline):   # TODO
 
 def test_normal_behaviour(mongo_database, unused_tcp_port, shutdown_system, virtualwatts_procfs_timeline, virtualwatts_power_timeline ):
     tcp_sensor = TCPThread(virtualwatts_procfs_timeline, unused_tcp_port)
-    file_sensor = FileThread(virtualwatts_power_timeline, '/tmp/SW_output')
+    file_sensor = FileThread(virtualwatts_power_timeline, 'SW_output')
 
     vw_pro = MainProcess(unused_tcp_port)
     vw_pro.start()
