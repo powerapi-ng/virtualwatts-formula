@@ -60,8 +60,8 @@ jobs:
            VERSION=$(grep "powerapi " setup.cfg | cut -d = -f 2) 
            pip install thespian 
            wget https://github.com/powerapi-ng/powerapi/releases/tag/$VERSION/python3-powerapi_1.0.0-1_all.deb
-           dpkg -i python3-powerapi_1.0.0-1_all.deb
-           apt install -f y 
+           sudo dpkg -i python3-powerapi_1.0.0-1_all.deb
+           sudo apt install -f y 
       - name: install virtuallwatts
         run: | 
             . venv/bin/activate
