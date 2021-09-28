@@ -52,4 +52,4 @@ jobs:
       - name: Lint with pylint
         run: |
           . venv/bin/activate
-          pylint virtuallwatts
+          pylint virtualwatts
