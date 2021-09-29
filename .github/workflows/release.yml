@@ -49,16 +49,13 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies
         run: |
-          python3 -m venv venv
-          . venv/bin/activate
           python -m pip install --upgrade pip
-          pip install flake8 pylint
+          sudo pip install flake8 pylint
       - name: install powerapi
         if: ${{ matrix.python-version == 3.6 }}
         run: |
-           . venv/bin/activate
            VERSION=$(grep "powerapi " setup.cfg | cut -d = -f 2) 
-           pip install thespian 
+           sudo pip install thespian 
            wget https://github.com/powerapi-ng/powerapi/releases/download/1.0.0/python3-powerapi_1.0.0-1_all.deb
            sudo dpkg -i python3-powerapi_1.0.0-1_all.deb || echo ok
            sudo apt install -f -y 
@@ -66,21 +63,17 @@ jobs:
 
       - name: install virtuallwatts
         run: | 
-            . venv/bin/activate
-            pip install .
+            sudo pip install .
       - name: Test with pytest
         run: |
-          . venv/bin/activate
           python setup.py pytest
       - name: Lint with flake8
         if: ${{ matrix.python-version != 3.6 }}
         run: |
-          . venv/bin/activate
           flake8 powerapi
       - name: Lint with pylint
         if: ${{ matrix.python-version != 3.6 }}
         run: |
-          . venv/bin/activate
           pylint powerapi
   check_release:
     name: Check release and version correspondance
