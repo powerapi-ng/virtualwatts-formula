@@ -189,7 +189,7 @@ jobs:
           cd ./deb_dist/virtualwatts-$VERSION
           DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage
           mkdir -p ~/deb
-          cp ../python3-virtualwatts-$VERSION-1_all.deb ~/deb/
+          cp ../python3-virtualwatts_$VERSION-1_all.deb ~/deb/
           ls ~/deb/
       - uses: actions/upload-artifact@v2
         with:
