@@ -88,7 +88,7 @@ jobs:
         id: step2
         run: |
           export GIT_TAG=$(echo $GITHUB_REF | sed -e 's/refs\/tags\/v//g')
-          test $GIT_TAG ==  $(grep __version__ powerapi/__init__.py | cut -d \" -f 2)
+          test $GIT_TAG ==  $(grep __version__ virtualwatts/__init__.py | cut -d \" -f 2)
           echo "::set-output name=version::$GIT_TAG"
   build_pypi:
     name: Push package on pypi
@@ -130,14 +130,14 @@ jobs:
           context: .
           push: true
           file: Dockerfile-cpython
-          tags: powerapi/powerapi:latest, powerapi/powerapi:${{needs.check_release.outputs.version}}
+          tags: powerapi/virtualwatts:latest, powerapi/virtualwatts:${{needs.check_release.outputs.version}}
       - name: Build and push pypy image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
           file: Dockerfile-pypy
-          tags: powerapi/powerapi-pypy:latest, powerapi/powerapi:pypy-${{needs.check_release.outputs.version}}
+          tags: powerapi/virtualwatts-pypy:latest, powerapi/virtualwatts:pypy-${{needs.check_release.outputs.version}}
   build_deb_package:
     name: Build debian binary package
     runs-on: ubuntu-latest
@@ -178,9 +178,9 @@ jobs:
         run: |
           apt install -y python3-setuptools python3-stdeb python3-numpy
           mkdir package
-          mv LICENSE README.md contributing.md powerapi setup.* package/
-          tar czvf powerapi.tar.gz package
-          py2dsc powerapi.tar.gz
+          mv LICENSE README.md contributing.md virtualwatts setup.* package/
+          tar czvf virtualwatts.tar.gz package
+          py2dsc virtualwatts.tar.gz
           sed -i '/Depends: ${misc:Depends}, ${python3:Depends}/a Suggests: python3-libvirt,python3-pymongo,python3-prometheus-client,python3-influxdb' ./deb_dist/powerapi-${{needs.check_release.outputs.version}}/debian/control
       - name: Build binary package and upload it github release page
         env:
@@ -189,7 +189,7 @@ jobs:
           cd ./deb_dist/powerapi-$VERSION
           DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage
           mkdir -p ~/deb
-          cp ../python3-powerapi_$VERSION-1_all.deb ~/deb/
+          cp ../python3-virtualwatts$VERSION-1_all.deb ~/deb/
           ls ~/deb/
       - uses: actions/upload-artifact@v2
         with:
