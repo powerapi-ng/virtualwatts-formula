@@ -62,7 +62,7 @@ jobs:
            wget https://github.com/powerapi-ng/powerapi/releases/download/1.0.0/python3-powerapi_1.0.0-1_all.deb
            sudo dpkg -i python3-powerapi_1.0.0-1_all.deb || echo ok
            sudo apt install -f -y 
-           py3compile -p python3-powerapi -V 3.3-
+           sudo py3compile -p python3-powerapi -V 3.3-
 
       - name: install virtuallwatts
         run: | 
