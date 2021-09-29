@@ -181,7 +181,7 @@ jobs:
           mv LICENSE README.md contributing.md virtualwatts setup.* package/
           tar czvf virtualwatts.tar.gz package
           py2dsc virtualwatts.tar.gz
-          sed -i '/Depends: ${misc:Depends}, ${python3:Depends}/a Suggests: python3-libvirt,python3-pymongo,python3-prometheus-client,python3-influxdb' ./deb_dist/powerapi-${{needs.check_release.outputs.version}}/debian/control
+          sed -i '/Depends: ${misc:Depends}, ${python3:Depends}/a Suggests: python3-libvirt,python3-pymongo,python3-prometheus-client,python3-influxdb' ./deb_dist/virtualwatts-${{needs.check_release.outputs.version}}/debian/control
       - name: Build binary package and upload it github release page
         env:
           VERSION: ${{needs.check_release.outputs.version}}
