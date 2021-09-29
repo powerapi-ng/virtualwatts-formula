@@ -61,24 +61,21 @@ jobs:
            sudo apt install -f -y 
            sudo py3compile -p python3-powerapi -V 3.3-
            sudo pip freeze 
-           echo "\n\n"
-           pip freeze 
-           echo "\n\n"
 
       - name: install virtuallwatts
         run: | 
             sudo pip install .
       - name: Test with pytest
         run: |
-          python setup.py pytest
+          sudo python setup.py pytest
       - name: Lint with flake8
         if: ${{ matrix.python-version != 3.6 }}
         run: |
-          flake8 powerapi
+          sudo flake8 powerapi
       - name: Lint with pylint
         if: ${{ matrix.python-version != 3.6 }}
         run: |
-          pylint powerapi
+          sudo pylint powerapi
   check_release:
     name: Check release and version correspondance
     runs-on: ubuntu-latest
