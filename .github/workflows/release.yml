@@ -186,7 +186,7 @@ jobs:
         env:
           VERSION: ${{needs.check_release.outputs.version}}
         run: |
-          cd ./deb_dist/powerapi-$VERSION
+          cd ./deb_dist/virtualwatts-$VERSION
           DEB_BUILD_OPTIONS=nocheck dpkg-buildpackage
           mkdir -p ~/deb
           cp ../python3-virtualwatts$VERSION-1_all.deb ~/deb/
