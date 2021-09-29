@@ -71,11 +71,11 @@ jobs:
       - name: Lint with flake8
         if: ${{ matrix.python-version != 3.6 }}
         run: |
-          sudo flake8 powerapi
+          sudo flake8 virtualwatts
       - name: Lint with pylint
         if: ${{ matrix.python-version != 3.6 }}
         run: |
-          sudo pylint powerapi
+          sudo pylint virtualwatts
   check_release:
     name: Check release and version correspondance
     runs-on: ubuntu-latest
