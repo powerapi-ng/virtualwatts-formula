@@ -117,6 +117,13 @@ jobs:
     needs: check_release
     steps:
       - uses: actions/checkout@v2
+      - name: Check powerapi version in Dockerfiles
+        run: |
+          VERSION=$(grep "powerapi " setup.cfg | cut -d = -f 2)
+          CPYTHON_VERSION=$(grep "FROM powerapi" Dockerfile-cpython | cut -d ":" -f 2)
+          PYPY_VERSION=$(grep "FROM powerapi" Dockerfile-pypy | cut -d ":" -f 2 | cut -d "-" -f 2)
+          test $VERSION == $CPYTHON_VERSION
+          test $VERSION == $PYPY_VERSION
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
@@ -135,7 +142,7 @@ jobs:
           context: .
           push: true
           file: Dockerfile-pypy
-          tags: powerapi/virtualwatts-pypy:latest, powerapi/virtualwatts:pypy-${{needs.check_release.outputs.version}}
+          tags: powerapi/virtualwatts:pypy-latest, powerapi/virtualwatts:pypy-${{needs.check_release.outputs.version}}
   build_deb_package:
     name: Build debian binary package
     runs-on: ubuntu-latest
