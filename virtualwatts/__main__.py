@@ -158,9 +158,8 @@ def run_virtualwatts(args) -> None:
         report_filter.filter(filter_rule, cpu_dispatcher)
 
         pullers_info = PullerGenerator(report_filter,
-                                       report_modifier_list).generate(
-                                           args
-                                       )
+                                       report_modifier_list).generate(args)
+
         for puller_name in pullers_info:
             puller_cls, puller_start_message = pullers_info[puller_name]
             supervisor.launch(puller_cls, puller_start_message)
