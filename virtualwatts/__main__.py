@@ -29,7 +29,6 @@ Main module of VirtualWatts
 import logging
 import signal
 import sys
-import json
 from typing import Dict
 import datetime
 
@@ -37,7 +36,6 @@ from powerapi import __version__ as powerapi_version
 from powerapi.dispatcher import DispatcherActor, RouteTable
 from powerapi.cli import ConfigValidator
 from powerapi.cli.tools import (
-    ComponentSubParser,
     ReportModifierGenerator,
     PullerGenerator,
     PusherGenerator,
@@ -62,12 +60,12 @@ from virtualwatts.actor import (VirtualWattsFormulaActor,
 from virtualwatts.context import VirtualWattsFormulaConfig
 
 
-def generate_virtualwatts_parser() -> ComponentSubParser:
+def generate_virtualwatts_parser():
     """
     Construct and returns the VirtuamWatts cli parameters parser.
     :return: VirtualWatts cli parameters parser
     """
-    parser = ComponentSubParser("virtualwatts")
+    parser = CommonCLIParser()
 
     # Sync Delay threshold
     parser.add_argument(
@@ -174,26 +172,6 @@ def run_virtualwatts(args) -> None:
     logging.info("VirtualWatts is shutting down...")
 
 
-def get_config_file(argv):
-    """ Retrieve the config file using the cli args"""
-    i = 0
-    for s in argv:
-        if s == "--config-file":
-            if i + 1 == len(argv):
-                logging.error("config file path needed with argument\
-                --config-file")
-                sys.exit(-1)
-            return argv[i + 1]
-        i += 1
-    return None
-
-
-def get_config_from_file(file_path):
-    """ Retrieve the config from the config file"""
-    config_file = open(file_path, "r")
-    return json.load(config_file)
-
-
 class VirtualWattsConfigValidator(ConfigValidator):
     """ Class to validate the config format """
     @staticmethod
@@ -211,23 +189,17 @@ class VirtualWattsConfigValidator(ConfigValidator):
         return True
 
 
-def get_config_from_cli():
-    """ Get the config from the cli"""
-    parser = CommonCLIParser()
-    parser.add_component_subparser(
-        "formula", generate_virtualwatts_parser(), "specify the formula to use"
-    )
-    return parser.parse_argv()
+def get_config():
+    """
+    Get he config from the cli args
+    """
+    parser = generate_virtualwatts_parser()
+    return parser.parse()
 
 
 if __name__ == "__main__":
     logging.debug("Loading VirtualWatts' config")
-    config_file_path = get_config_file(sys.argv)
-    config = (
-        get_config_from_file(config_file_path)
-        if config_file_path is not None
-        else get_config_from_cli()
-    )
+    config = get_config()
     logging.debug("Validate config")
     if not VirtualWattsConfigValidator.validate(config):
         sys.exit(-1)
