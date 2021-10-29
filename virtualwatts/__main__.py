@@ -35,11 +35,12 @@ import datetime
 from powerapi import __version__ as powerapi_version
 from powerapi.dispatcher import DispatcherActor, RouteTable
 from powerapi.cli import ConfigValidator
-from powerapi.cli.tools import (
+from powerapi.cli.tools import CommonCLIParser
+from powerapi.cli.generator import (
     ReportModifierGenerator,
     PullerGenerator,
     PusherGenerator,
-    CommonCLIParser,
+
 )
 from powerapi.message import DispatcherStartMessage
 from powerapi.report import PowerReport, ProcfsReport

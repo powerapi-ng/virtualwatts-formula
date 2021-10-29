@@ -24,4 +24,4 @@
 Declaration of module version and import of provided class
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
